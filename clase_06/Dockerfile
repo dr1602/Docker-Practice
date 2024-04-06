@@ -5,4 +5,4 @@ FROM nginx:latest
 # Path: /usr/share/nginx/html
 # todos los archivos en esa carpeta gracias al servidor web, se haran istio web
 
-COPY /sitio /usr/share/nginx/html  
+COPY /sitio /usr/share/nginx/html
