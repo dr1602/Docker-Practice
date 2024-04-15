@@ -69,3 +69,45 @@ cd /usr/share/nginx/html
 ## no quiere decir que nosotros tengamos nginx, sino que estamos conectados a un contenedor que si lo tiene como imagen.
 
 ## gracias a docker run desplegamos nuestra imagen como un docker container.
+
+## Formas alternativas de buscar con Docker
+
+## para buscar todas las imagenes
+
+docker images
+
+## para buscar una imagen en especifico a partir de su nombre y no de su tag
+
+docker images (nombreDeLaImagen)
+docker images sitioweb
+
+## para buscar a partir de un tag, luego de un nombre que no importa
+
+docker images --filter=reference='tag'
+docker images --filter=reference='*:01'
+
+## para poner el image ID de una forma mas extendida, el ID real de cada imagen, que sera el mismo si vienen del ismo docker file
+
+docler images --no-trunc
+
+## crear un nuevo tag para alguna de las imagenes en particular
+
+docker image tag sitioweb:latest admin/sitioweb:latest
+
+## eliminar las imagenes, existen 2 opciones.
+
+## eliminar con una etiqueta nueva
+
+docker rmi admin/sitioweb:latest
+
+## states: Untagged:admin/sitioweb:latest
+
+## eliminar imagen o grupo de imagenes, a partir de id
+
+docker rmi tag
+docker rmi 652b0fc1f6c6
+
+## forzar eliminacion
+
+docker rmi -f tag
+docker rmi -f 652b0fc1f6c6
