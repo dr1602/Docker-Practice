@@ -155,3 +155,57 @@ docker stats
 ## para volver a tu terminal una vez los stats, puedes utilizar ctr + c
 
 ##
+
+## PARA TEMAS DE FLASK
+
+## para instalar python
+
+apt install python3.10-venv
+
+## para crear el entorno
+
+python3 -m venv .venv
+
+## para instalar flask
+
+pip install Flask
+
+## para correr flask
+
+python3 -m flask run
+
+##
+
+## Para desplegar app en contenedor de docker
+
+##
+
+## puede utilizar a docker desktop para saber que imagen utilizaras a partir de la barra de busqueda y viendo la version de tu python con python3 --version y las tags que hay en los resultados de la busqueda
+
+## en el archivo docker file o DockerFile agregar:
+
+FROM python:3.13.0a6-alpine3.18
+
+## para crear el area de trabajo para desplegar todo lo que requiera la aplicacion o el directorio del proyect
+
+## la version mas estandarizada en los proyectos es /app porque varia segun lenguaje
+
+WORKDIR /app
+
+## ahora ya con directorio de trabajo, hay que agarrar del entorno global, el archivo requirement.txt para instalar enpython y para que API trabaje de maravilla. copiar de entorno local a docker
+
+COPY requirements.txt requirements.txt
+
+## despue se utiliza el comando run para ejecutar un comando dentro del contenedor para que la instalacion se quede completammente lista
+
+RUN pip install -r requirements.txt
+
+## para pasar el contenido de todo el directorio a /app
+
+COPY . .
+
+## las instrucciones se crean en sucuencia, se tienen que poner las instrucciones en orden
+
+## Poner comando pero en modo lista, para tener dockerfile listo para una imagen de python con api para tener un contenedor.
+
+## es importante que aclarar que las palabras reservadas y secuencias sirven para cualquier proyecto, como para despliegues de infraestructura y base de datos, sin iimprotar la tecnologia, lplataforma, del docker file, se usarn las palabras en todos los proyecto
