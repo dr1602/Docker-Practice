@@ -233,3 +233,29 @@ ls
 VOLUME [ "/sitio", "/usr/share/nginx/html" ]
 
 ## dependiendo del escenario podras elegir entre copy y volume, y lo importante es que sea la mas conveniente
+
+## para inspeccionar el contenedor que utilizamos a traves de un archivo json, el que mas interesa es la seccion Networks, pero tambiien vienen los puertos
+
+## para hacer modificaciones, primero tenemos que detener el docker
+
+docker stop web
+
+## ahora haremos una mdoificacion a la ip, asi se puede asignar una ip para cad auno de los contenedores y asi se podra orquestar sin ningun problema, si no se asigna una ip en eel comenda, se adsigna de manera interna, para que no haya un clocnlficto de comandos en la red  de docker
+
+docker run -it --rm -d -p 127.0.0.1:8080:80 --name web nginx
+
+## bridge, genera un enlace entre cualquier entorno y el entorno de docker, y la mejor forma de explorarlo explroar las redes es
+
+docker network ls
+
+## existe conexiones tipo bridge, host y none, bridge es la conxion tradicional entre contenedores, el host es una conexion entre dos contenedores y none es aquella que desea que no haya conexiones en la red. y se pueden hacer bridges personalizados, donde se puede interactuar de forma personalizada.
+
+## para crear un puente o red en docker se hace
+
+docker network create platzinet
+
+## eso fue hacer una segmentacion de redes, para crear un precepto de minimo acceso, para que solo accedan a los contenedores que estrictamente necesitan, y evitar que accedan a los que no.
+
+
+
+
