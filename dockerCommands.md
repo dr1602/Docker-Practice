@@ -89,7 +89,7 @@ docker images sitioweb
 ## para buscar a partir de un tag, luego de un nombre que no importa
 
 docker images --filter=reference='tag'
-docker images --filter=reference='*:01'
+docker images --filter=reference='\*:01'
 
 ## para poner el image ID de una forma mas extendida, el ID real de cada imagen, que sera el mismo si vienen del ismo docker file
 
@@ -209,3 +209,27 @@ COPY . .
 ## Poner comando pero en modo lista, para tener dockerfile listo para una imagen de python con api para tener un contenedor.
 
 ## es importante que aclarar que las palabras reservadas y secuencias sirven para cualquier proyecto, como para despliegues de infraestructura y base de datos, sin iimprotar la tecnologia, lplataforma, del docker file, se usarn las palabras en todos los proyecto
+
+## de las mejorares caracteristicas de docker son sus volumenes, son espacios compartidos entre equipo local y contenedor de docker, no imagen, es algo que ya se esta ejecutando, se tiene una especie de carpeta cmpartida, o unidad de disco compartido, un puente de comunicacion de datos, entre contendedor y equipo lcoal, escenarios hay muchos, para acutalizar un sitio web mientras contenedor se ejecuta, puedes utilizar el vilumne para actualizar el sitio, para analisis de datos, el volumen es importante para tuliazar las bases de datos mientras el contenedor se acutaliza, un escenario es
+
+## comando inicial para el proyecto de sustitucion de imagenes (el parametro de volumen esta fijado, por eso se puede utilizar ese comando)
+
+docker run -it --rm -d -p 8080:80 -v ./sitio:/usr/share/nginx/html/sitio --name web nginx
+
+## ejecutar comando para ir a contenedor deseado dentro de docker desktop
+
+cd usr/share/nginx/html/sitio
+
+ls
+
+cd assets
+
+ls
+
+## la diferencia entre una copia y crear un volumen de docker consiste en que copy produce cambios permanentes, mientras que un volumen genera un cambio temporal, hay escenarios para cada palabrar reservda
+
+## sitio es el origen, la siguiente ruta es el destino
+
+VOLUME [ "/sitio", "/usr/share/nginx/html" ]
+
+## dependiendo del escenario podras elegir entre copy y volume, y lo importante es que sea la mas conveniente
