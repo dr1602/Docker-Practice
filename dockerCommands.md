@@ -49,6 +49,11 @@ docker run -it --rm -d -p 8080:80 --name web
 ## nombre del contenedor
 
 docker run -it --rm -d -p 8080:80 --name web sitioweb
+docker run -it --rm -d -p 8080:80 --name web sitioweb:01
+
+## para tener dos contenedores operando al mismo tiempo
+
+docker run -it --rm -d -p 8085:80 --name web2 sitioweb:01
 
 ## la imagen que quiero hacer contenedor, regresa una respeusta
 
@@ -88,7 +93,7 @@ docker images --filter=reference='*:01'
 
 ## para poner el image ID de una forma mas extendida, el ID real de cada imagen, que sera el mismo si vienen del ismo docker file
 
-docler images --no-trunc
+docker images --no-trunc
 
 ## crear un nuevo tag para alguna de las imagenes en particular
 
@@ -111,3 +116,42 @@ docker rmi 652b0fc1f6c6
 
 docker rmi -f tag
 docker rmi -f 652b0fc1f6c6
+
+## da lo mismo que docker image pero para los contenedores, un listado de todos los conetenedores desplegados en el momento
+
+docker ps
+
+## para muchos contenedores desplegados, para visualizarlos se usa
+
+docker ps -a
+
+##
+
+## Recuerda que lo importante de estos comandos es ver el container id
+
+##
+
+## una variable del comenado es, para tener una columna adicional llamada "size", en kb pero el tamanio real al trabajar con el contenedor en docker es distinto y en mb, el tamanio en MB es el tamanio real que se usara cada vez que se ejecute el contenedor
+
+docker ps --size
+
+## para detener los contenedores que en el momento no estoy utilizando, se usa, para gestionar los recursos de docker de una forma mas flexible
+
+docker stop <id>
+docker stop a46e50b77d37
+
+##
+
+## Ahora es importante revisar que pasa con docker desktop
+
+##
+
+## para ver el desempenio de tu equipo al desplegar el docker puedes utilizar
+
+docker stats
+
+##
+
+## para volver a tu terminal una vez los stats, puedes utilizar ctr + c
+
+##
