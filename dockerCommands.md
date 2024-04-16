@@ -330,3 +330,13 @@ docker save dr1602/linktree > linktree.rar
 docker load --input linktree.rar
 
 ## y lo puedes verificar tanto en docker desktop como en docker images
+
+## el volumen de contenedores hace mas compleja su gestion, porque puede costar trabajo inclusive saber en que puerto corren, se puede entrometer en los puertos de los contnedores, una de la solucioens faiceles es meter varias funcoiones de varios contenedores, en un solo contenedor pero es una mala practica, de meter mucha funcionalidad enun contenedor que no es mas eficiente
+
+## docker compose, ayuda a estrucutrar de una forma mas lineal y estructurada un volumen grande de contenedores, la instalacion y ocnfiguracion es transparente, ya que trabaja junto con docker.
+
+## lo unico que dc hace es organizar las imagenes y desplegarlas al mismo tiempo y gestionar la configuracion de cada contenedor
+
+## dc, es un buen entrenamiento para la orquestacion de contenedores, hacia docker swam y cubernetes, que es lo mas soficisticado
+
+## docker compose es simplemente capaz de fconfigurar es la gestion de los serivicios, redes, volumenes, configuraciones, secrets, variables de entorno.
