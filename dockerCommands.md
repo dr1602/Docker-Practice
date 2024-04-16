@@ -340,3 +340,21 @@ docker load --input linktree.rar
 ## dc, es un buen entrenamiento para la orquestacion de contenedores, hacia docker swam y cubernetes, que es lo mas soficisticado
 
 ## docker compose es simplemente capaz de fconfigurar es la gestion de los serivicios, redes, volumenes, configuraciones, secrets, variables de entorno.
+
+# Clase 18
+
+## usaremos docker compose para poder desplegar tanto backend como frontend sin tener problema de compatibilidad o comunicacion entre ellas y se realiza de la sig manera, descarga los mismo archivos
+
+## para tomar la lista de los docker files que nos especificaron usamos
+
+docker compose build
+
+## recuerda que todos los archivos sean correctos, especialemente los dockerfile
+
+## ahora correremos el equivalente de docker run dentro de docker compose
+
+docker compose up
+
+## sentencia curl apuntada no a local host sino al nombre del contenediro, por fuera si podemos usar local host, por dentro, tienen que comuinicarse con el nombre de sus contenedoeres, puede que queramos que los puertos no esten expuesto a usuarios y que solo se comuniquen entre contenedores.
+
+## los contenedores se hablan por sus nobmres de dominio
