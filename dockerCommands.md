@@ -240,7 +240,7 @@ VOLUME [ "/sitio", "/usr/share/nginx/html" ]
 
 docker stop web
 
-## ahora haremos una mdoificacion a la ip, asi se puede asignar una ip para cad auno de los contenedores y asi se podra orquestar sin ningun problema, si no se asigna una ip en eel comenda, se adsigna de manera interna, para que no haya un clocnlficto de comandos en la red  de docker
+## ahora haremos una mdoificacion a la ip, asi se puede asignar una ip para cad auno de los contenedores y asi se podra orquestar sin ningun problema, si no se asigna una ip en eel comenda, se adsigna de manera interna, para que no haya un clocnlficto de comandos en la red de docker
 
 docker run -it --rm -d -p 127.0.0.1:8080:80 --name web nginx
 
@@ -256,6 +256,77 @@ docker network create platzinet
 
 ## eso fue hacer una segmentacion de redes, para crear un precepto de minimo acceso, para que solo accedan a los contenedores que estrictamente necesitan, y evitar que accedan a los que no.
 
+## ahora trabajaremos con docker hub para compartir proyectos en la nube
 
+## lo primero que hay que hacer es hacer login via terminal de comando o desde docker desktop
 
+docker login
 
+## y luego ingresar login y password
+
+## para compartir proyectos productivos o en desarrollo con equipos de trabajo
+
+## ahora con trabajaremos con la imagen para poderlo desplegar en docker hub
+
+docker build -t <nombreDeUsuario>/<nombrededespliege>:<version> .
+docker build -t dr1602/linktree:latest .
+
+## con esto lo crearemos con la tag correcta a publicar, con esto docker sabe a que cuenta de usuario publicar imagen y validara que sea la misma cuenta, al crear la imagen se valida con
+
+docker images
+
+## lo identificas con el nombre del repo, una vez que validaz que son correctos, aplicas
+
+docker push <nombreDeUsuario>/<nombredeproyecto>:<version>
+docker push dr1602/linktree:latest
+
+## una vez publicado se puede volver a docker hub para comprobar que esta publicado, ver que ya es una imagen compartida.
+
+## para descargar la imagen remota del docker, dentro de mi cuenta en mi entorno local, lo que se necesatria hacer es
+
+## los parametros utilizados no varian entre una imagen local y una imagen que aun no se tiene en el equipo.
+
+## hoy en dia al descargar una imagen de docker hub, no hay una forma de saber en que puerto esta corriendo dicha imagen descargada, para crear una imagen publica hay que crear una explicacion publica sobre que funcion hace tu imagen para que el usuario no tenga que adivinar.
+
+## para saber como funciona docker: 1. correr docker, 2. correr docker ps, 3. verificar la columna command, si ese archivo deja de funcionar, el contenedor deja de funcionar.
+
+## podemos emular ese archivo con:
+
+/bin/bash
+
+docker run --name dr1602 --rm -it -p 8080:80 dr1602/linktree:latest /bin/bash
+
+## pero no se corre de forma normal, por lo cual se tiene que forzar a un exit.
+
+## tienes que ejectuar este codigo para volver al normalidad
+
+exit
+
+## bash es una terminal de linux per hay mas posibildiades como sh
+
+## ahora vamos a inspeccionar que viene en el contenedor
+
+docker run --name dr1602 --rm -it -p 8080:80 dr1602/linktree:latest /bin/bash
+
+## con
+
+docker ps
+
+## y docker inspect
+
+## pueden existir casos en los que no puedas compartir imagenes por restricciones de red, o que no las puedas compartir por el ancho de banda de tu red, y por ello se tenga que hacer por una unidad extraible, existen 2 comandos para poderlo lograr, save y export y docker load e import para cargarlo.
+
+## para exportar a archivo comprimido
+
+docker save <archivoAExportar> > <nombreYTipoDeaArchivo>
+docker save dr1602/linktree > linktree.rar
+
+## verificar con ls que exista archivo
+
+## el archivo, al seleccionarlo, puede contener varias versiones del archivo que se esta seleccionando y un archivo manifest.json, con enorme cantidad de layers. tag que rerpesenta una version previa de la imagen, como agrear librearias o instruccion, lo que crea una nueva capa o version que se acumula en layers, es un historial de versiones.x
+
+## para extraer archivo, usamos:
+
+docker load --input linktree.rar
+
+## y lo puedes verificar tanto en docker desktop como en docker images
